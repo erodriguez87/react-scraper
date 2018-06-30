@@ -21,7 +21,7 @@ const articleSeed = [
 
 db.Article
   .remove({})
-  .then(() => db.Book.collection.insertMany(bookSeed))
+  .then(() => db.Article.collection.insertMany(articleSeed))
   .then(data => {
     console.log(data.insertedIds.length + " records inserted!");
     process.exit(0);

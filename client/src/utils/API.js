@@ -16,3 +16,4 @@ export default {
     return axios.post("/api/articles", articleData);
   }
 };
+

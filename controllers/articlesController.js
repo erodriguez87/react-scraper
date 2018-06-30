@@ -6,9 +6,9 @@ module.exports = {
   //return all articles
   findAll: function(req, res) {
     db.Article
-      .find(req.query)
-      .sort({ date: -1 })
-      .then(dbModel => res.json(dbModel))
+      .find(req.query) //uses the query to search
+      .sort({ date: -1 }) // sorts for most recent articles first
+      .then(dbModel => res.json(dbModel)) //
       .catch(err => res.status(422).json(err));
   },
   //return one article by id

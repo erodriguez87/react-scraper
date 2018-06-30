@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import DeleteBtn from "../../components/DeleteBtn"
 // import Jumbotron from "../../components/Jumbotron";
 import API from "../../utils/API";
-import { Link } from "react-router-dom";
 import apiKey from '../../utils/apikey.js'
 // import { Col, Row, Container } from "../../components/Grid";
 // import { List, ListItem } from "../../components/List";
@@ -55,13 +54,12 @@ class Articles extends Component {
       API.getArticles({
       params: {
         'api-key': apiKey,
-        q: this.state.topic,
+        topic: this.state.topic,
         begin_date: this.state.startYear,
         end_date: this.state.endYear
         }
       })
       .then(res => {
-        console.log(res.data.response.docs)
         this.setState({ articles: res.data.response.docs, topic: "", startYear: "", endYear: "" })
       }
       )
@@ -88,7 +86,7 @@ class Articles extends Component {
                     name="topic"
                     placeholder="Topic - Required"
                   />
-                  <label htmlFor="begDate">Beginning Date</label>
+                  <label htmlFor="startYear">Beginning Date</label>
                   <input className='form-control'
                     type='date'
                     value={this.state.startYear}
@@ -96,7 +94,7 @@ class Articles extends Component {
                     name="startYear"
                     placeholder="Beginning Date"
                   />
-                  <label htmlFor="endDate">End Date</label>
+                  <label htmlFor="endYear">End Date</label>
                   <input className='form-control'
                     type="date"
                     value={this.state.endYear}
@@ -106,8 +104,8 @@ class Articles extends Component {
                   />
                   <br />
                   <button
-                    className="btn btn-success float-right"
-                    disabled={!(this.state.topic)}
+                    className="btn btn-info float-right"
+                    disabled={!(this.state.topic)} //disabled while there is nothing in topic input text field
                     onClick={this.handleFormSubmit}
                   >
                     Search
@@ -137,7 +135,7 @@ class Articles extends Component {
                             </strong>
                           </a>
                           <span className="results">
-                          <button className="btn btn-primary"
+                          <button className="btn btn-secondary float-right"
                             onClick={() => this.saveArticle({
                               title: article.headline.main,
                               url: article.web_url,
